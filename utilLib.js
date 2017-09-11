@@ -175,7 +175,33 @@
         };
         util.doTest(localCtx, 'trimField',params,index.trimField, '[this, field, has whitespace]', formatter);
 
+        tester.addField('_raw_content_', new JavaString('byte[] to String').getBytes('UTF-8'));
+
+        var params = [tester,'_raw_content_'];
+        util.doTest(localCtx, 'rawField2String', params, index.rawField2String,'byte[] to String');
+
         //logger.info('\n\n************\n* bye  :  \n*****************************\n\n');
+    };
+    util.raw2String = function(byteArray,charset){
+        charset = charset || 'UTF-8';
+        if(byteArray) {
+            return new JavaString(byteArray,charset);
+        }
+    };
+    /**
+     *
+     * @param doc PipelineDocument
+     * @param fieldname fieldname containing byte[] e.g. _raw_content_
+     * @param charset  optional charset encoding name.  Default 'UTF-8'
+     * @return {string} Java String object or, if doc[fieldname] is empty, ''.
+     */
+    index.rawField2String = function(doc,fieldname, charset){
+        var bytes = doc.getFirstFieldValue(fieldname); //this should be a byte array
+        var s = '';
+        if(bytes){
+            s = util.raw2String(bytes,charset);
+        }
+        return s;
     };
     /** spin thru all field names and return the ones matching the pattern
      * For example, parsers which handle document nesting sometimes produce lists of fields such as
