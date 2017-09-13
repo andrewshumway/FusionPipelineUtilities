@@ -1,6 +1,8 @@
 # Fusion Pipeline Utilities
 These utility files are intended for use in Pipeline Stages used within the Lucidworks Fusion product. 
 
+Details regarding use see https://lucidworks.com/2017/08/16/fusion-javascript-shared-scripts-utility-functions-unit-tests/
+
 ## Setup
 After installing and starting Lucidworks Fusion, place the `utilLib.js` file in the <FUSION_HOME>/scripts directory so that it is publicly readable.
 
